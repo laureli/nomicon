@@ -1,9 +1,23 @@
 from flask import Flask, render_template, request, flash
 from forms import ContactForm
+from flask.ext.mail import Message, Mail
 
-
+# APPLICATION CONFIG
+mail = Mail()
+ 
 app = Flask(__name__)
-app.secret_key='dev key here'
+ 
+app.secret_key = 'development key'
+ 
+app.config["MAIL_SERVER"] = "smtp.gmail.com"
+app.config["MAIL_PORT"] = 465
+app.config["MAIL_USE_SSL"] = True
+app.config["MAIL_USERNAME"] = 'contact@example.com'
+app.config["MAIL_PASSWORD"] = 'your-password'
+ 
+mail.init_app(app)
+
+# APPLICATION ORGANIZATION
 
 @app.route('/')
 def home():
@@ -13,6 +27,7 @@ def home():
 def about():
 	return render_template('about.html')
 
+# how do i want to transfer msgs?
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
 	form =ContactForm()
@@ -22,7 +37,14 @@ def contact():
 			flash('please fill in all fields correctly')
 			return render_template('contact.html', form=form)
 		else:
-			return 'form posted'
+			msg=Message(form.subject.data, sender='sender-contact@example.com', recipients=['recip@example.com'])
+			msg.body = """
+			From: %s <%s>
+			%s
+			""" %(form.name.data, form.email.data, form.message.data)
+			mail.send(msg)
+
+			return render_template('contact.html', success=True)
 
 	elif request.method == 'GET':
 		return render_template('contact.html', form=form)
