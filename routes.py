@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash
 from forms import ContactForm
 
 
@@ -18,7 +18,11 @@ def contact():
 	form =ContactForm()
 
 	if request.method == 'POST':
-		return 'form posted'
+		if form.validate()== False:
+			flash('please fill in all fields correctly')
+			return render_template('contact.html', form=form)
+		else:
+			return 'form posted'
 
 	elif request.method == 'GET':
 		return render_template('contact.html', form=form)
