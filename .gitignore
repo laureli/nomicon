@@ -29,13 +29,7 @@ nosetests.xml
 # Translations
 *.mo
 
-# Mr Developer
-.mr.developer.cfg
-.project
-.pydevproject
-
 /env
-codes.txt
 
 lib-cov
 *.seed
@@ -52,8 +46,6 @@ results
 
 npm-debug.log
 
-# testing files
-A-practice.js
-static/ext_backbone.js
-static/popup.js
-templates/aaaaaaa.html
+# auth info
+codes.py
+codes.txt
