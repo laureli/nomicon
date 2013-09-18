@@ -1,17 +1,8 @@
 from flask import Flask, render_template, request, flash
 from forms import ContactForm
 from flask.ext.mail import Message, Mail
+from codes import email_username, email_pw
 import mixpanel
-
-
-import cgitb
-cgitb.enable()
-
-print "Content-Type: text/plain;charset=utf-8"
-print
-
-print "Hello World!"
-
 
 # APPLICATION CONFIG
 mail = Mail()
@@ -23,8 +14,8 @@ app.secret_key = 'development key'
 app.config["MAIL_SERVER"] = "smtp.gmail.com"
 app.config["MAIL_PORT"] = 465
 app.config["MAIL_USE_SSL"] = True
-app.config["MAIL_USERNAME"] = 'contact@example.com'
-app.config["MAIL_PASSWORD"] = 'your-password'
+app.config["MAIL_USERNAME"] = email_username
+app.config["MAIL_PASSWORD"] = email_pw
  
 mail.init_app(app)
 
