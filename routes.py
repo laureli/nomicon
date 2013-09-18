@@ -1,6 +1,17 @@
 from flask import Flask, render_template, request, flash
 from forms import ContactForm
 from flask.ext.mail import Message, Mail
+import mixpanel
+
+
+import cgitb
+cgitb.enable()
+
+print "Content-Type: text/plain;charset=utf-8"
+print
+
+print "Hello World!"
+
 
 # APPLICATION CONFIG
 mail = Mail()
