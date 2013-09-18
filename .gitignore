@@ -35,8 +35,7 @@ nosetests.xml
 .pydevproject
 
 /env
-NOTES.txt
-NOTES AND REMINDERS.txt
+codes.txt
 
 lib-cov
 *.seed
