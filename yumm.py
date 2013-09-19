@@ -3,7 +3,6 @@ from json import load
 from codes import api_key, api_id
 
 terms_list = ""
-parameters = []
 params =''
 
 
