@@ -1,6 +1,6 @@
 gevent-websocket
 gevent
-flask-mail
+Flask-Mail
 
 Flask==0.10
 Flask-SQLAlchemy==0.16
