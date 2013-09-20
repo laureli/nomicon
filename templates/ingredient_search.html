@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-	<div class='jumbo'>
-		<h2> recipe search </h2>
+	<div class='largeBlock'>
+		<h2> nom-search:</h2>
 		<h3> check out noms using yummly's api</h3>
 	</div>
 
@@ -13,7 +13,12 @@
 		{{ form.ingredient.label }}
 		{{ form.ingredient }}
 
-		{{ form.submit }}
+		{{ form.ing_submit }}
+
+		{{ form.recipe.label }}
+		{{ form.recipe }}
+
+		{{ form.rec_submit }}
 	</form>
 
 
