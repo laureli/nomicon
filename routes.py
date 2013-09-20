@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, flash
-from forms import ContactForm
+from forms import ContactForm, IngSearchForm, SignUpForm
 from flask_mail import Message, Mail
 from codes import email_username, email_pw
 import mixpanel
@@ -55,7 +55,15 @@ def contact():
 		return render_template('contact.html', form=form)
 
 
+@app.route('/ingredient_search', methods=['GET', 'POST'])
+def ing_search():
+	form=IngSearchForm()
 
+	return render_template('ingredient_search.html', form=form)
+
+
+
+  # //////////////  START TEST MAIL FEATURE ///////////////
 @app.route("/mailtest")
 def mailtest():
 
@@ -65,6 +73,8 @@ def mailtest():
                   )
     mail.send(msg)
     return 'maybe your email got sent'
+# //////////////  END TEST MAIL FEATURE ///////////////
+
 
 
 
