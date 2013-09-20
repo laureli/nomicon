@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<div class='jumbo'>
+		<h2> recipe search </h2>
+		<h3> check out noms using yummly's api</h3>
+	</div>
+
+
+	<form action="{{ url_for('ing_search') }}" method=POST>
+		{{ form.hidden_tag() }}
+
+		{{ form.ingredient.label }}
+		{{ form.ingredient }}
+
+		{{ form.submit }}
+	</form>
+
+
+
+{% endblock %}
