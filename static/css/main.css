@@ -20,7 +20,7 @@ header {
 header h1.logo {
   margin: 0;
   font-size: 1.7em;
-  color: #fff;
+  color: #8CC649;;
   text-transform: lowercase;
   float: left;
 }
@@ -41,7 +41,15 @@ header h1.logo:hover {
  
 div.largeBlock {
   padding: 10px 0 30px 0;
-  background-color: #eeeeee;
+  background-color: #C5D54F;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+}
+
+div.midBlock {
+  padding: 10px 0 30px 0;
+  background-color: #C5D54F;
   -webkit-border-radius: 6px;
      -moz-border-radius: 6px;
           border-radius: 6px;
@@ -81,7 +89,7 @@ h3 {
 }
 
 .menu li a {
-  color #eeeeee;
+  color:#823790;
   text-decoration: none;
 }
 
