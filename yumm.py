@@ -26,7 +26,9 @@ search_url += api_id+'&_app_key='+api_key
 search_url +='&q='+params
 # print search_url
 
-get_url = 'http://api.yummly.com/v1/api/recipe/'
-get_url += recip_id
-get_url += '?_app_id='+api_id+'&_app_key='+api_key
-# print get_url
+
+#  FRAMEWORK FOR GETTING RECIPES
+# get_url = 'http://api.yummly.com/v1/api/recipe/'
+# get_url += recip_id
+# get_url += '?_app_id='+api_id+'&_app_key='+api_key
+# # print get_url
