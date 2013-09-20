@@ -39,7 +39,7 @@ header h1.logo:hover {
   margin: 0 auto;
 }
  
-div.jumbo {
+div.largeBlock {
   padding: 10px 0 30px 0;
   background-color: #eeeeee;
   -webkit-border-radius: 6px;
@@ -160,3 +160,13 @@ form input#submit:hover{
   padding: 10px;
   width: 400px;
 }
+
+/*
+search form
+*/
+
+
+
+
+
+
