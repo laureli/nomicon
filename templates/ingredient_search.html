@@ -6,7 +6,10 @@
 		<h3> check out noms using yummly's api</h3>
 	</div>
 
+	{% if success %}
+		<p> Thanks for your message.  We'll read it soon.</p>
 
+	{% else %}
 	<form action="{{ url_for('ing_search') }}" method=POST>
 		{{ form.hidden_tag() }}
 
