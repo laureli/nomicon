@@ -59,7 +59,18 @@ def contact():
 def ing_search():
 	form=IngSearchForm()
 
-	return render_template('ingredient_search.html', form=form)
+	if request.method == 'POST':
+		if form.validate()== False:
+			flash('please fill in all fields correctly')
+			return render_template('ingredient_search.html', form=form)
+		else:
+
+			# do the search
+			# see above and figure it out. set up DB, datamodel etc.
+
+
+	elif request.method == 'GET':
+		return render_template('ingredient_search.html', form=form)
 
 
 
