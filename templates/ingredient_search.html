@@ -7,9 +7,19 @@
 	</div>
 
 	{% if success %}
-		<p> Thanks for your message.  We'll read it soon.</p>
+		<p> yeah food, we're searching now.</p>
 
 	{% else %}
+
+		{% for message in form.ingredient.errors %}
+			<div class='flash'>{{ message }}</div>
+		{% endfor %}
+
+		{% for message in form.recipe.errors %}
+			<div class='flash'>{{ message }}</div>
+		{% endfor %}
+
+
 	<form action="{{ url_for('ing_search') }}" method=POST>
 		{{ form.hidden_tag() }}
 
