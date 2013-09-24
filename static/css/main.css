@@ -41,7 +41,7 @@ header h1.logo:hover {
  
 div.largeBlock {
   padding: 10px 0 30px 0;
-  background-color: #C5D54F;
+  background-color: #8CC649;
   -webkit-border-radius: 6px;
      -moz-border-radius: 6px;
           border-radius: 6px;
@@ -89,7 +89,7 @@ h3 {
 }
 
 .menu li a {
-  color:#823790;
+  color:#BA6BC7;
   text-decoration: none;
 }
 
