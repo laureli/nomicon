@@ -1,1 +1,0 @@
-Pythoning with food, APIs, and other whatnots as they arise.
