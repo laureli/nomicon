@@ -10,7 +10,8 @@ import mixpanel
  
 # mail = Mail(app)
 
-# APPLICATION ORGANIZATION
+
+# //////////////  START APPLICATION ORGANIZATION ///////////////
 
 @app.route('/')
 def home():
@@ -20,27 +21,10 @@ def home():
 def about():
 	return render_template('about.html')
 
-# how do i want to transfer msgs?
-@app.route('/contact', methods=['GET', 'POST'])
-def contact():
-	form =ContactForm()
+# //////////////  END APPLICATION ORGANIZATION ///////////////
 
-	if request.method == 'POST':
-		if form.validate()== False:
-			flash('please fill in all fields correctly')
-			return render_template('contact.html', form=form)
-		else:
-		    msg = Message(form.subject.data, sender='sample@sample.com', recipients=email_username)
-		    msg.body = """
-		    From: %s <%s>
-		    %s
-		    """ % (form.name.data, form.email.data, form.message.data)
-		    mail.send(msg)
-		    return render_template('contact.html', success=True)
 
-	elif request.method == 'GET':
-		return render_template('contact.html', form=form)
-
+# //////////////  START YUMMLY SEARCHING ///////////////
 
 @app.route('/ingredient_search', methods=['GET', 'POST'])
 def ing_search():
@@ -78,9 +62,26 @@ def recipe_search():
 	else:
 		return "sigh."
 
+# //////////////  END YUMMLY SEARCHING ///////////////
 
+# //////////////  START USER MANAGEMENT ///////////////
 
-  # //////////////  START DATABASE TEST ///////////////
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+	form = SignUpForm()
+
+	if request.method =='POST':
+		if form.validate()==False:
+			return render_template('signup.html', form=form)
+		else:
+			return "create a new yser, sign in as a user, redirect to user profile."
+
+	elif request.method == 'GET':
+		return render_template('signup.html', form=form)
+
+# //////////////  END USER MANAGEMENT ///////////////
+
+# //////////////  START DATABASE TEST ///////////////
 
 @app.route('/testdb')
 def testdb():
@@ -89,10 +90,10 @@ def testdb():
 	else:
 		return 'something is broken.'
 
-  # //////////////  END DATABASE TEST ///////////////
+# //////////////  END DATABASE TEST ///////////////
 
 
-  # //////////////  START TEST MAIL FEATURE ///////////////
+# //////////////  START TEST MAIL FEATURE ///////////////
 @app.route("/mailtest")
 def mailtest():
 
@@ -102,6 +103,28 @@ def mailtest():
                   )
     mail.send(msg)
     return 'maybe your email got sent'
+
+
+# how do i want to transfer msgs?
+@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+	form =ContactForm()
+
+	if request.method == 'POST':
+		if form.validate()== False:
+			flash('please fill in all fields correctly')
+			return render_template('contact.html', form=form)
+		else:
+		    msg = Message(form.subject.data, sender='sample@sample.com', recipients=email_username)
+		    msg.body = """
+		    From: %s <%s>
+		    %s
+		    """ % (form.name.data, form.email.data, form.message.data)
+		    mail.send(msg)
+		    return render_template('contact.html', success=True)
+
+	elif request.method == 'GET':
+		return render_template('contact.html', form=form)
 # //////////////  END TEST MAIL FEATURE ///////////////
 
 
