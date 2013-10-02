@@ -1,8 +1,7 @@
 from flask import Flask
-
+from codes import *
 app = Flask(__name__)
 
-import nom_app.routes
 
 app.secret_key = 'development key'
 
@@ -18,3 +17,10 @@ app.secret_key = 'development key'
 
 # -------------- END MAIL SETTINGS -- REMOVE THIS 
 
+app.config['SQLALCHEMY_DATABASE_URI'] = db_login
+ 
+from models import db
+db.init_app(app
+
+
+import nom_app.routes
