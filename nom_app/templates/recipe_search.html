@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<div class='largeBlock'>
+		<h2> recipe search:</h2>
+		<h3> check out noms using yummly's api</h3>
+	</div>
+
+	{% if success %}
+		<p> yeah food, we're searching recipes now.</p>
+
+	{% else %}
+
+		{% for message in form.recipe.errors %}
+			<div class='flash'>{{ message }}</div>
+		{% endfor %}
+
+
+	<form action="{{ url_for('recipe_search') }}" method=POST>
+		{{ form.hidden_tag() }}
+
+		{{ form.recipe.label }}
+		{{ form.recipe }}
+
+		{{ form.rec_submit }}
+	</form>
+
+	{% endif %}
+{% endblock %}
