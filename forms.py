@@ -13,7 +13,12 @@ class SignUpForm(Form):
 
 #  //////////////// searching forms
 class IngSearchForm(Form):
-	ingredient = TextAreaField('ingredients:', [validators.Required('please enter at least 1 ingredient. \n you can separate them with spaces or commas.')])
+	ingredient = TextAreaField('ingredients:', 
+		[validators.Required('please enter at least 1 ingredient. you can separate them with spaces or commas.')])
 	ing_submit = SubmitField('search')
-	recipe = TextAreaField('recipe terms:', [validators.Required('please enter 1+ terms that might be in the recipe name.')])
+
+
+class RecipeSearchForm(Form):
+	recipe = TextAreaField('recipe terms:', 
+		[validators.Required('please enter 1+ terms that might be in the recipe name.')])
 	rec_submit = SubmitField('search')

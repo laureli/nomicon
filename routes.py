@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, flash
-from forms import ContactForm, IngSearchForm, SignUpForm
+from forms import ContactForm, IngSearchForm, RecipeSearchForm, SignUpForm
 from flask_mail import Message, Mail
 from codes import email_username, email_pw
 import mixpanel
@@ -7,20 +7,22 @@ import mixpanel
 # APPLICATION CONFIG
  
 app = Flask(__name__)
-mail = Mail(app)
-
  
 app.secret_key = 'development key'
- 
-app.config["MAIL_SERVER"] = "smtp.gmail.com"
-app.config["MAIL_PORT"] = 465
-app.config["MAIL_USE_SSL"] = True
-app.config["MAIL_USERNAME"] = email_username
-app.config["MAIL_PASSWORD"] = email_pw
 
-app.config["MAIL_DEFAULT_SENDER"] = email_username
+# -------------- START MAIL SETTINGS -- REMOVE THIS 
+# mail = Mail(app)
 
-mail = Mail(app)
+# app.config["MAIL_SERVER"] = "smtp.gmail.com"
+# app.config["MAIL_PORT"] = 465
+# app.config["MAIL_USE_SSL"] = True
+# app.config["MAIL_USERNAME"] = email_username
+# app.config["MAIL_PASSWORD"] = email_pw
+
+# app.config["MAIL_DEFAULT_SENDER"] = email_username
+
+# mail = Mail(app)
+# -------------- END MAIL SETTINGS -- REMOVE THIS 
 
 
 # APPLICATION ORGANIZATION
@@ -64,14 +66,32 @@ def ing_search():
 			flash('please fill in all fields correctly')
 			return render_template('ingredient_search.html', form=form)
 		else:
+			return "snap"
 
 			# do the search
 			# see above and figure it out. set up DB, datamodel etc.
-
-
+	
 	elif request.method == 'GET':
 		return render_template('ingredient_search.html', form=form)
+	else:
+		return "sigh."
 
+
+@app.route('/recipe_search', methods=['GET', 'POST'])
+def recipe_search():
+	form=RecipeSearchForm()
+
+	if request.method == 'POST':
+		if form.validate()== False:
+			flash('please fill in all fields correctly')
+			return render_template('recipe_search.html', form=form)
+		else:
+			return "snap"
+
+	elif request.method == 'GET':
+		return render_template('recipe_search.html', form=form)
+	else:
+		return "sigh."
 
 
   # //////////////  START TEST MAIL FEATURE ///////////////
