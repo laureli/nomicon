@@ -2,26 +2,28 @@
 
 {% block content %}
 	<div class='largeBlock'>
-		<h2> ingredient search:</h2>
+		<h2> nom-search:</h2>
 		<h3> check out noms using yummly's api</h3>
 	</div>
 
 	{% if success %}
-		<p> yeah food, we're searching now.</p>
+		<p> yeah food, we're searching recipes now.</p>
 
 	{% else %}
 
-		{% for message in form.ingredient.errors %}
+
+		{% for message in form.recipe.errors %}
 			<div class='flash'>{{ message }}</div>
 		{% endfor %}
 
-	<form action="{{ url_for('ing_search') }}" method=POST>
+
+	<form action="{{ url_for('recipe_search') }}" method=POST>
 		{{ form.hidden_tag() }}
 
-		{{ form.ingredient.label }}
-		{{ form.ingredient }}
+		{{ form.recipe.label }}
+		{{ form.recipe }}
 
-		{{ form.ing_submit }}
+		{{ form.rec_submit }}
 	</form>
 
 	{% endif %}
