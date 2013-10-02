@@ -8,9 +8,6 @@ class ContactForm(Form):
 	message = TextAreaField('Message', [validators.Required('please enter your msg.')])
 	submit = SubmitField('Send')
 
-class SignUpForm(Form):
-	pass
-
 #  //////////////// searching forms
 class IngSearchForm(Form):
 	ingredient = TextAreaField('ingredients:', 
@@ -22,3 +19,26 @@ class RecipeSearchForm(Form):
 	recipe = TextAreaField('recipe terms:', 
 		[validators.Required('please enter 1+ terms that might be in the recipe name.')])
 	rec_submit = SubmitField('search')
+
+
+
+class SignUpForm(Form):
+	firstname = TextField("First name",  [validators.Required("Please enter your first name.")])
+	lastname = TextField("Last name",  [validators.Required("Please enter your last name.")])
+	email = TextField("Email",  [validators.Required("Please enter your email address."), validators.Email("Please enter your email address.")])
+	password = PasswordField('Password', [validators.Required("Please enter a password.")])
+	submit = SubmitField("Create account")
+
+	def __init__(self, *args, **kwargs):
+		Form.__init__(self, *args, **kwargs)
+
+	def validate(self):
+		if note Form.validate(self):
+			return False
+
+		user = User.query.filter_by(email = self.email.data.lower()).first()
+		if user:
+			self.email.errors.append("That email is already taken")
+			return False
+		else:
+			return True
