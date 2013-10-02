@@ -3,6 +3,7 @@ from flask import render_template, request, flash
 from forms import ContactForm, IngSearchForm, RecipeSearchForm, SignUpForm
 from flask_mail import Message, Mail
 from codes import email_username, email_pw
+from models import db
 import mixpanel
 
 # APPLICATION CONFIG
@@ -78,6 +79,19 @@ def recipe_search():
 		return "sigh."
 
 
+
+  # //////////////  START DATABASE TEST ///////////////
+
+@app.route('/testdb')
+def testdb():
+	if db.session.query("1").from_statement("SELECT 1").all():
+		return 'it works, cools!'
+	else:
+		return 'something is broken.'
+
+  # //////////////  END DATABASE TEST ///////////////
+
+
   # //////////////  START TEST MAIL FEATURE ///////////////
 @app.route("/mailtest")
 def mailtest():
@@ -89,8 +103,6 @@ def mailtest():
     mail.send(msg)
     return 'maybe your email got sent'
 # //////////////  END TEST MAIL FEATURE ///////////////
-
-
 
 
 if __name__=='__main__':
