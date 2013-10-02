@@ -1,4 +1,4 @@
-from flask.ext.wtf import Form, TextField, TextAreaField, SubmitField, validators, ValidationError
+from flask.ext.wtf import Form, TextField, TextAreaField, SubmitField, validators, ValidationError, PasswordField
 
 #  //////////////// user management forms
 class ContactForm(Form):
@@ -33,7 +33,7 @@ class SignUpForm(Form):
 		Form.__init__(self, *args, **kwargs)
 
 	def validate(self):
-		if note Form.validate(self):
+		if not Form.validate(self):
 			return False
 
 		user = User.query.filter_by(email = self.email.data.lower()).first()
