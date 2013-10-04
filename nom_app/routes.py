@@ -1,9 +1,9 @@
 from nom_app import app
-from flask import render_template, request, flash
+from flask import render_template, request, flash, session, url_for, redirect
 from forms import ContactForm, IngSearchForm, RecipeSearchForm, SignUpForm
 from flask_mail import Message, Mail
 from codes import email_username, email_pw
-from models import db
+from models import db, User
 import mixpanel
 
 # APPLICATION CONFIG
@@ -68,16 +68,42 @@ def recipe_search():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
-	form = SignUpForm()
+  form = SignUpForm()
 
-	if request.method =='POST':
-		if form.validate()==False:
-			return render_template('signup.html', form=form)
-		else:
-			return "create a new yser, sign in as a user, redirect to user profile."
+  if 'email' in session:
+    return redirect(url_for('profile')) 
+  
+  if request.method == 'POST':
+    if form.validate() == False:
+      return render_template('signup.html', form=form)
+    else:
+      newuser = User(form.firstname.data, form.lastname.data, form.email.data, form.password.data)
+      db.session.add(newuser)
+      db.session.commit()
+      
+      session['email'] = newuser.email
+      return redirect(url_for('profile'))
+  
+  elif request.method == 'GET':
+    return render_template('signup.html', form=form)
 
-	elif request.method == 'GET':
-		return render_template('signup.html', form=form)
+@app.route('/profile')
+def profile():
+
+	if 'email' not in session:
+		return redirect(url_for('signin'))
+
+	user = User.query.filter_by(email = session['email']).first()
+
+	if user is None:
+		return redirect(url_for('signin'))
+	else:
+		return render_template('profile.html')
+
+
+
+
+
 
 # //////////////  END USER MANAGEMENT ///////////////
 
