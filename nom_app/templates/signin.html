@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+	<div class='largeBlock'>
+		<h2>signin page</h2>
+		<h3>get at some recipes here</h3>
+	</div>
+
+	{% for message in form.email.errors %}
+		<div class='flash'>{{ message }}</div>
+	{% endfor %}
+
+	{% for message in form.password.errors %}
+		<div class='flash'>{{ message }}</div>
+	{% endfor %}
+
+	<form action="{{ url_for('contact') }}" method=POST>
+		{{ form.hidden_tag() }}
+
+		{{ form.email.label }}
+		{{ form.email }}
+
+		{{ form.password.label }}
+		{{ form.password }}
+
+		{{form.submit}}
+	</form>
+{% endblock %}
