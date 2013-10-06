@@ -104,6 +104,9 @@ def profile():
 @app.route('/signin', methods=['GET', 'POST'])
 def signin():
 	form = SignInForm()
+
+	if 'email' in session:
+		return redirect(url_for('profile'))
    
 	if request.method == 'POST':
 		if form.validate() == False:

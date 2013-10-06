@@ -1,4 +1,6 @@
+from flask.ext.wtf import Form
 from flask.ext.wtf import Form, TextField, TextAreaField, SubmitField, validators, ValidationError, PasswordField
+from models import db, User
 
 #  //////////////// user management forms
 class ContactForm(Form):
