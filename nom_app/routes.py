@@ -6,11 +6,11 @@ from flask_mail import Message, Mail
 from forms import ContactForm, IngSearchForm, RecipeSearchForm, SignUpForm, SignInForm, LoginForm
 from models import db, User
 
-from codes import email_username, email_pw
+from codes import *
 
 # APPLICATION CONFIG
  
-mail = Mail()
+mail = Mail(app)
 
 ################  START APPLICATION ORGANIZATION ###############
 
@@ -120,7 +120,8 @@ def ing_search():
 			flash('please fill in all fields correctly')
 			return render_template('ingredient_search.html', form=form)
 		else:
-			return "snap"
+			ingredient = form.ingredient.data
+			return ingredient
 
 			# do the search
 			# see above and figure it out. set up DB, datamodel etc.
