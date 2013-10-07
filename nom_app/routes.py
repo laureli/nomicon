@@ -1,14 +1,14 @@
 from nom_app import app
-from flask import render_template, request, flash, session, url_for, redirect
+from flask import render_template, request, flash, session, url_for, redirect, g
 from forms import ContactForm, IngSearchForm, RecipeSearchForm, SignUpForm, SignInForm
+from flask.ext.login import LoginManager, login_user, logout_user, current_user, login_required
 from flask_mail import Message, Mail
 from codes import email_username, email_pw
 from models import db, User
 
 # APPLICATION CONFIG
  
-# mail = Mail(app)
-
+mail = Mail()
 
 # //////////////  START APPLICATION ORGANIZATION ///////////////
 
@@ -22,46 +22,6 @@ def about():
 
 # //////////////  END APPLICATION ORGANIZATION ///////////////
 
-
-# //////////////  START YUMMLY SEARCHING ///////////////
-
-@app.route('/ingredient_search', methods=['GET', 'POST'])
-def ing_search():
-	form=IngSearchForm()
-
-	if request.method == 'POST':
-		if form.validate()== False:
-			flash('please fill in all fields correctly')
-			return render_template('ingredient_search.html', form=form)
-		else:
-			return "snap"
-
-			# do the search
-			# see above and figure it out. set up DB, datamodel etc.
-	
-	elif request.method == 'GET':
-		return render_template('ingredient_search.html', form=form)
-	else:
-		return "sigh."
-
-
-@app.route('/recipe_search', methods=['GET', 'POST'])
-def recipe_search():
-	form=RecipeSearchForm()
-
-	if request.method == 'POST':
-		if form.validate()== False:
-			flash('please fill in all fields correctly')
-			return render_template('recipe_search.html', form=form)
-		else:
-			return "snap"
-
-	elif request.method == 'GET':
-		return render_template('recipe_search.html', form=form)
-	else:
-		return "sigh."
-
-# //////////////  END YUMMLY SEARCHING ///////////////
 
 # //////////////  START USER MANAGEMENT ///////////////
 
@@ -126,6 +86,46 @@ def signout():
 	return redirect(url_for('home'))
 
 # //////////////  END USER MANAGEMENT ///////////////
+
+# //////////////  START YUMMLY SEARCHING ///////////////
+
+@app.route('/ingredient_search', methods=['GET', 'POST'])
+def ing_search():
+	form=IngSearchForm()
+
+	if request.method == 'POST':
+		if form.validate()== False:
+			flash('please fill in all fields correctly')
+			return render_template('ingredient_search.html', form=form)
+		else:
+			return "snap"
+
+			# do the search
+			# see above and figure it out. set up DB, datamodel etc.
+	
+	elif request.method == 'GET':
+		return render_template('ingredient_search.html', form=form)
+	else:
+		return "sigh."
+
+
+@app.route('/recipe_search', methods=['GET', 'POST'])
+def recipe_search():
+	form=RecipeSearchForm()
+
+	if request.method == 'POST':
+		if form.validate()== False:
+			flash('please fill in all fields correctly')
+			return render_template('recipe_search.html', form=form)
+		else:
+			return "snap"
+
+	elif request.method == 'GET':
+		return render_template('recipe_search.html', form=form)
+	else:
+		return "sigh."
+
+# //////////////  END YUMMLY SEARCHING ///////////////
 
 # //////////////  START DATABASE TEST ///////////////
 
