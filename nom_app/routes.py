@@ -8,6 +8,9 @@ from models import db, User
 
 from codes import *
 
+from urllib2 import urlopen
+from json import load 
+
 # APPLICATION CONFIG
  
 mail = Mail(app)
@@ -120,8 +123,29 @@ def ing_search():
 			flash('please fill in all fields correctly')
 			return render_template('ingredient_search.html', form=form)
 		else:
-			ingredient = form.ingredient.data
-			return ingredient
+			dirty_ingredients = str(form.ingredient.data)
+			print 'TYPE INGREDIENT INPUT IS:',type(dirty_ingredients)
+
+			clean_ingredients = ""
+			params =''
+			recip_id =""
+
+			# sample functional query:
+			# 	http://api.yummly.com/v1/api/recipes?_app_id=___ SAMPLE ID___ &_app_key=___ SAMPLE KEY __ &q=strawberry+beer+
+
+			if ',' in dirty_ingredients:
+				clean_ingredients = dirty_ingredients.split(',')
+			else:
+				clean_ingredients = dirty_ingredients.split()
+
+			return 'TERMS LIST IS:', clean_ingredients
+
+			for item in clean_ingredients:
+				params = params+item+'+'
+
+
+
+			# return ingredient
 
 			# do the search
 			# see above and figure it out. set up DB, datamodel etc.
