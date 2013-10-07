@@ -60,6 +60,8 @@ def signup():
       db.session.commit()
       
       session['email'] = newuser.email
+      session['firstname'] = newuser.firstname
+      session['lastname'] = newuser.lastname
       return redirect(url_for('profile'))
   
   elif request.method == 'GET':

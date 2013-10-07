@@ -66,7 +66,7 @@ class SignInForm(Form):
 		if user and user.check_password(self.password.data):
 			return True
 		else:
-			self.email.errors.append("Invalid e-mail or password")
+			self.email.errors.append("Please signin or make a new account")
 			return False
 
 class LoginForm(Form):
