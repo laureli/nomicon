@@ -1,8 +1,9 @@
-from flask.ext.wtf import Form
-from flask.ext.wtf import Form, TextField, TextAreaField, SubmitField, validators, ValidationError, PasswordField
+from flask.ext.wtf import Form, validators, ValidationError, PasswordField
+from flask.ext.wtf import TextField, TextAreaField, SubmitField
 from models import db, User
 
-#  //////////////// user management forms
+################ user management forms  ###############
+
 class ContactForm(Form):
 	name = TextField('Name', [validators.Required('please enter your name.')])
 	email = TextField('Email', [validators.Required('please enter your email.'), validators.Email('please enter your email.')])
@@ -10,7 +11,9 @@ class ContactForm(Form):
 	message = TextAreaField('Message', [validators.Required('please enter your msg.')])
 	submit = SubmitField('Send')
 
-#  //////////////// searching forms
+
+################ searching forms  ###############
+
 class IngSearchForm(Form):
 	ingredient = TextAreaField('ingredients:', 
 		[validators.Required('please enter at least 1 ingredient. you can separate them with spaces or commas.')])
@@ -23,6 +26,7 @@ class RecipeSearchForm(Form):
 	rec_submit = SubmitField('search')
 
 
+################ user management forms  ###############
 
 class SignUpForm(Form):
 	firstname = TextField("First name",  [validators.Required("Please enter your first name.")])

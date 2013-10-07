@@ -10,7 +10,7 @@ from models import db, User
  
 mail = Mail()
 
-# //////////////  START APPLICATION ORGANIZATION ///////////////
+################  START APPLICATION ORGANIZATION ###############
 
 @app.route('/')
 def home():
@@ -20,10 +20,27 @@ def home():
 def about():
 	return render_template('about.html')
 
-# //////////////  END APPLICATION ORGANIZATION ///////////////
+################  END APPLICATION ORGANIZATION ###############
 
+############### Start LoginHandler settings ###############
 
-# //////////////  START USER MANAGEMENT ///////////////
+lm = LoginManager()
+lm.init_app(app)
+lm.login_view = 'login'
+
+@lm.user_loader
+def load_user(id):
+    return dbsession.query(User).get(int(id))
+
+@app.before_request
+def before_request():
+    g.user = current_user
+    # this is used as 'current_user.id' or 'current_user.email'
+   
+
+############### End LoginHandler settings ###############
+
+################  START USER MANAGEMENT ///////////////
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -85,9 +102,9 @@ def signout():
 	session.pop('email', None)
 	return redirect(url_for('home'))
 
-# //////////////  END USER MANAGEMENT ///////////////
+################  END USER MANAGEMENT ///////////////
 
-# //////////////  START YUMMLY SEARCHING ///////////////
+################  START YUMMLY SEARCHING ///////////////
 
 @app.route('/ingredient_search', methods=['GET', 'POST'])
 def ing_search():
@@ -125,9 +142,9 @@ def recipe_search():
 	else:
 		return "sigh."
 
-# //////////////  END YUMMLY SEARCHING ///////////////
+################  END YUMMLY SEARCHING ///////////////
 
-# //////////////  START DATABASE TEST ///////////////
+################  START DATABASE TEST ///////////////
 
 @app.route('/testdb')
 def testdb():
@@ -136,10 +153,10 @@ def testdb():
 	else:
 		return 'something is broken.'
 
-# //////////////  END DATABASE TEST ///////////////
+################  END DATABASE TEST ///////////////
 
 
-# //////////////  START TEST MAIL FEATURE ///////////////
+################  START TEST MAIL FEATURE ///////////////
 @app.route("/mailtest")
 def mailtest():
 
@@ -171,7 +188,8 @@ def contact():
 
 	elif request.method == 'GET':
 		return render_template('contact.html', form=form)
-# //////////////  END TEST MAIL FEATURE ///////////////
+
+################  END TEST MAIL FEATURE ///////////////
 
 
 if __name__=='__main__':
