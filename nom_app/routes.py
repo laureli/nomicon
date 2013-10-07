@@ -4,7 +4,6 @@ from forms import ContactForm, IngSearchForm, RecipeSearchForm, SignUpForm, Sign
 from flask_mail import Message, Mail
 from codes import email_username, email_pw
 from models import db, User
-import mixpanel
 
 # APPLICATION CONFIG
  
