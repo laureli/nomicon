@@ -1,5 +1,5 @@
 from flask.ext.wtf import Form, validators, ValidationError, PasswordField
-from flask.ext.wtf import TextField, TextAreaField, SubmitField
+from flask.ext.wtf import TextField, TextAreaField, SubmitField, BooleanField
 from models import db, User
 
 ################ user management forms  ###############
@@ -68,3 +68,12 @@ class SignInForm(Form):
 		else:
 			self.email.errors.append("Invalid e-mail or password")
 			return False
+
+class LoginForm(Form):
+    email = TextField('Email', [validators.Email(message= (u'Invalid email address'))])
+    password = PasswordField('Password', [validators.Required(), validators.length(min=6, max=25)])
+    remember_me = BooleanField('remember_me', default = False)
+
+
+
+

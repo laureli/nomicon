@@ -1,10 +1,12 @@
 from nom_app import app
 from flask import render_template, request, flash, session, url_for, redirect, g
-from forms import ContactForm, IngSearchForm, RecipeSearchForm, SignUpForm, SignInForm
 from flask.ext.login import LoginManager, login_user, logout_user, current_user, login_required
 from flask_mail import Message, Mail
-from codes import email_username, email_pw
+
+from forms import ContactForm, IngSearchForm, RecipeSearchForm, SignUpForm, SignInForm, LoginForm
 from models import db, User
+
+from codes import email_username, email_pw
 
 # APPLICATION CONFIG
  
@@ -22,7 +24,7 @@ def about():
 
 ################  END APPLICATION ORGANIZATION ###############
 
-############### Start LoginHandler settings ###############
+# ############### Start LoginHandler settings ###############
 
 lm = LoginManager()
 lm.init_app(app)
@@ -35,10 +37,10 @@ def load_user(id):
 @app.before_request
 def before_request():
     g.user = current_user
-    # this is used as 'current_user.id' or 'current_user.email'
+#     # this is used as 'current_user.id' or 'current_user.email'
    
 
-############### End LoginHandler settings ###############
+# ############### End LoginHandler settings ###############
 
 ################  START USER MANAGEMENT ///////////////
 
@@ -89,6 +91,7 @@ def signin():
 			return render_template('signin.html', form=form)
 		else:
 			session['email'] = form.email.data
+			session['firstname'] = form.firstname.data
 			return redirect(url_for('profile'))
 
 	elif request.method == 'GET':
